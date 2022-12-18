@@ -32,7 +32,6 @@
                 <div id="content">
                     @include('layouts.partials.topBar')
                     @yield('content')
-
                 </div>
             </div>
         </div>
@@ -93,7 +92,11 @@
     </div>
 
     <!-- Custom scripts for all pages-->
-    <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script> --}}
     <script src="assets/js/sb-admin-2.min.js"></script>
+
+    {{-- Own made scripts --}}
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

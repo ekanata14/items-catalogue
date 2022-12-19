@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     <h1>User</h1>
     <div class="row">
         <div class="table-responsive col-6">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreItemsRequest;
 use App\Http\Requests\UpdateItemsRequest;
 use App\Models\Items;
+use Illuminate\Support\Str;
 
 class ItemsController extends Controller
 {
@@ -38,7 +39,17 @@ class ItemsController extends Controller
      */
     public function store(StoreItemsRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'price' => 'required',
+            'sell_price' => 'required'
+        ]);
+
+        $validatedData["item_id"] = Str::substr($validatedData['name'], 0, 3) . Str::substr($validatedData['name'], -3);
+
+        Items::create($validatedData);
+
+        return redirect('items')->with("success", $validatedData['name'] . ' has been created');
     }
 
     /**
@@ -70,9 +81,17 @@ class ItemsController extends Controller
      * @param  \App\Models\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateItemsRequest $request, Items $items)
+    public function update(UpdateItemsRequest $request, Items $item)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'sell_price' => 'required'
+        ]);
+
+        Items::where('id', $item->id)->update($validatedData);
+
+        return redirect('/items')->with('success', $validatedData['name'] . " has been updated");
     }
 
     /**
@@ -81,8 +100,9 @@ class ItemsController extends Controller
      * @param  \App\Models\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Items $items)
+    public function destroy(Items $item)
     {
-        //
+        Items::destroy($item->id);
+        return redirect('/items')->with('success', $item->name . " has been deleted");
     }
 }

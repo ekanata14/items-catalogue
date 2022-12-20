@@ -45,7 +45,7 @@ class ItemsController extends Controller
             'sell_price' => 'required'
         ]);
 
-        $validatedData["item_id"] = Str::substr($validatedData['name'], 0, 3) . Str::substr($validatedData['name'], -3);
+        $validatedData["item_id"] = Str::upper(Str::substr($validatedData['name'], 0, 3) . Str::substr($validatedData['name'], -3));
 
         Items::create($validatedData);
 

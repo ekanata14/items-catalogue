@@ -47,10 +47,10 @@
             <span>Items</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('history') ? 'active' : ''}}">
-        <a class="nav-link collapsed" href="/user">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>History</span>
+    <li class="nav-item {{ Request::is('sale') ? 'active' : ''}}">
+        <a class="nav-link collapsed" href="/sale">
+            <i class="fa-solid fa-scale-unbalanced"></i>
+            <span>Sale</span>
         </a>
     </li>
 

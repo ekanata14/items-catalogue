@@ -15,7 +15,9 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view("sale.index");
+        return view("sale.index",[
+            'items' => Items::all() 
+        ]);
     }
 
     /**
@@ -36,7 +38,12 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required'
+        ]);
+
+        var_dump($validatedData);
     }
 
     /**

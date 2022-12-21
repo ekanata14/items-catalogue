@@ -20,6 +20,7 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Sell Price</th>
+                    <th>Stock</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Action</th>
@@ -32,10 +33,11 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $item->sell_price }}</td>
+                        <td>{{ $item->stock }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td class="d-flex gap-2">
-                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                            <button id="addStockButton" data-bs-toggle="modal" data-bs-target="#addStockModal" class="btn btn-info" data-id="{{ $item->id }}"><i class="fas fa-plus"></i> Add Stock</button>
                             <button class="btn btn-warning" id="updateItemButton" data-bs-toggle="modal" data-bs-target="#modal" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" data-sellPrice="{{ $item->sell_price }}"><i class="fas fa-pen"></i></button>
                             <form action="/items/{{ $item->id }}" method="POST">
                                 @csrf
@@ -84,10 +86,47 @@
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="stock" class="form-control form-control-user @error('stock') is-invalid @enderror" placeholder="Stock" required autofocus >
+                    @error('stock')
+                        <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" id="buttonSubmit" class="btn btn-primary">Save changes</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Stock Modal -->
+<div class="modal fade" id="addStockModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Add Stock</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="modalBody" class="modal-body">
+            <form method="POST" id="addStockForm">
+                @csrf
+                <input type="hidden" id="itemStockId" name="id">
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="stock" class="form-control form-control-user @error('stock') is-invalid @enderror" placeholder="Stock" required autofocus>
+
+                    @error('stock')
+                        <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" id="buttonSubmit" class="btn btn-primary">Add Stock</button>
         </form>
         </div>
       </div>

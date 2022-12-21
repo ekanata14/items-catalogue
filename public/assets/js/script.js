@@ -1,12 +1,18 @@
 // Modal Anatomies
 const addItemButton = document.querySelector("#addItemButton");
 const updateItemButton = document.querySelectorAll("#updateItemButton");
+const addRecordButton = document.querySelector("#addRecordButton");
+const addStockButton = document.querySelector("#addStockButton");
 
 const modalContainer = document.querySelector("#modal");
 const modalLabel = document.querySelector("#modalLabel");
 const modalBody = document.querySelector("#modalBody");
 const modalForm = document.querySelector("#modalForm");
 const buttonSubmit = document.querySelector("#buttonSubmit");
+
+const modalStock = document.querySelector("#addStockModa")
+const modalStockForm = document.querySelector("#addStockForm");
+const modalInputStockId = document.querySelector("#itemStockId");
 
 const inputName = document.querySelector("#itemName");
 const inputPrice = document.querySelector("#itemPrice");
@@ -45,5 +51,17 @@ $(document).ready(function(){
             inputPrice.setAttribute("value", price);
             inputSellPrice.setAttribute("value", sellPrice);
         });
+    });
+
+    $(addRecordButton).on("click", ()=>{
+        modalLabel.innerHTML = "Add Record";
+        modalForm.setAttribute("action", "sale");
+        buttonSubmit.innerHTML = "Add";
+    });
+
+    $(addStockButton).on("click", ()=>{
+        let id = $(addStockButton).attr("data-id");
+        modalInputStockId.value = id;
+        modalStockForm.setAttribute("action", `items/addStock/${id}`);
     });
 })

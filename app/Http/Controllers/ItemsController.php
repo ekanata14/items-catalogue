@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreItemsRequest;
 use App\Http\Requests\UpdateItemsRequest;
 use App\Models\Items;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ItemsController extends Controller
@@ -42,7 +43,8 @@ class ItemsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required',
-            'sell_price' => 'required'
+            'sell_price' => 'required',
+            'stock' => 'required'
         ]);
 
         $validatedData["item_id"] = Str::upper(Str::substr($validatedData['name'], 0, 3) . Str::substr($validatedData['name'], -3));
@@ -50,6 +52,21 @@ class ItemsController extends Controller
         Items::create($validatedData);
 
         return redirect('items')->with("success", $validatedData['name'] . ' has been created');
+    }
+
+    public function addStock(StoreItemsRequest $request, Items $item)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required',
+            'stock' => 'required|integer'
+        ]);
+
+        // dd($validatedData);
+
+        DB::statement("UPDATE `items` SET `stock` = " . (int)$validatedData['stock'] . " WHERE `items` . `id` = " .$validatedData['id']);
+        
+        return redirect('items')->with("success", $item->name . ' stock has been added');
+
     }
 
     /**

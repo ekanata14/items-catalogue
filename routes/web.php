@@ -31,6 +31,7 @@ Route::resource('user', UserController::class);
 
 // Items Controller
 Route::resource('items', ItemsController::class);
+Route::post('items/addStock/{items:item_id}', [ItemsController::class, 'addStock'])->name('addStock');
 
 // Sale Controller
 Route::resource('sale', SaleController::class);

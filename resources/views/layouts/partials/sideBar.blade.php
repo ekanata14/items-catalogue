@@ -49,7 +49,7 @@
     </li>
     <li class="nav-item {{ Request::is('sale') ? 'active' : ''}}">
         <a class="nav-link collapsed" href="/sale">
-            <i class="fa-solid fa-scale-unbalanced"></i>
+            <i class="fa-solid fa-clipboard-list"></i>
             <span>Sale</span>
         </a>
     </li>

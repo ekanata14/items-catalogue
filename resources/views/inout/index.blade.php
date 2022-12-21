@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-4">
-                <button class="btn btn-primary my-3" id="addRecordButton" data-bs-toggle="modal" data-bs-target="#modal">Add Records <i class="fas fa-plus"></i></button>
+                <button class="btn btn-primary my-3" id="addInOutButton" data-bs-toggle="modal" data-bs-target="#modal">Add Records <i class="fas fa-plus"></i></button>
             </div>
         </div>
         <div class="row">
@@ -27,21 +27,29 @@
                 <table class="table table-striped">
                     <thead>
                         <th>No</th>
+                        <th>Item Id</th>
                         <th>Name</th>
-                        <th>Price</th>
-                        <th>Sell Price</th>
-                        <th>Amount</th>
+                        <th>In</th>
+                        <th>Out</th>
+                        <th>Created At</th>
                         <th>Total</th>
 
                     </thead>
                     <tbody>
-                        {{-- @foreach ($items as $item)
-                        
-                        <td>{{ $loop->iteration }}</td>
-                        @endforeach --}}
+                        @foreach ($inouts as $inout)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $inout->items_id }}</td>
+                            <td>{{ $inout->name }}</td>
+                            <td>{{ $inout->in }}</td>
+                            <td>{{ $inout->out }}</td>
+                            <td>{{ date('d-m-Y', strtotime($inout->created_at))}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <th>Grand Total</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -66,7 +74,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Item Name</label>
-                    <select name="name" id="itemName" class="form-select" @error('name') is-invalid @enderror">
+                    <select name="items_id" id="itemsId" class="form-select mb-3" @error('name') is-invalid @enderror">
                         @foreach($items as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -74,9 +82,14 @@
                     @error('name')
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
-                    <input type="number" id="amount" name="amount" class="form-control form-control-user @error('amount') is-invalid @enderror" placeholder="Item Amount" required autofocus>
+                    <input type="number" id="in" name="in" class="form-control form-control-user @error('in') is-invalid @enderror mb-3" placeholder="Item In" required autofocus>
 
-                    @error('amount')
+                    @error('in')
+                        <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                    <input type="number" id="out" name="out" class="form-control form-control-user @error('out') is-invalid @enderror" placeholder="Item Out" required autofocus>
+
+                    @error('out')
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>

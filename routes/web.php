@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InOutController;
 use App\Http\Controllers\ItemsController;
 
 /*
@@ -31,10 +32,13 @@ Route::resource('user', UserController::class);
 
 // Items Controller
 Route::resource('items', ItemsController::class);
-Route::post('items/addStock/{items:item_id}', [ItemsController::class, 'addStock'])->name('addStock');
+Route::post('items/addStock/{id}', [ItemsController::class, 'addStock'])->name('addStock');
 
 // Sale Controller
 Route::resource('sale', SaleController::class);
+
+// In Out Controller
+Route::resource('inout', InOutController::class);
 
 Auth::routes();
 

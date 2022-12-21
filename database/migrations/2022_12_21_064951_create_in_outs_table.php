@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('in_out', function (Blueprint $table) {
+        Schema::create('in_outs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id');
+            $table->foreignId('items_id');
             $table->string('name');
             $table->integer('in');
             $table->integer('out');

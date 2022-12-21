@@ -53,7 +53,12 @@
             <span>Sale</span>
         </a>
     </li>
-
+    <li class="nav-item {{ Request::is('inout') ? 'active' : ''}}">
+        <a class="nav-link collapsed" href="/inout">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>In Out</span>
+        </a>
+    </li>
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo"

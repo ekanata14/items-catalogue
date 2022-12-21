@@ -19,6 +19,7 @@ class ItemsController extends Controller
     {
         return view('items.index',[
             'items' => Items::all()
+            
         ]);
     }
 
@@ -52,21 +53,6 @@ class ItemsController extends Controller
         Items::create($validatedData);
 
         return redirect('items')->with("success", $validatedData['name'] . ' has been created');
-    }
-
-    public function addStock(StoreItemsRequest $request, Items $item)
-    {
-        $validatedData = $request->validate([
-            'id' => 'required',
-            'stock' => 'required|integer'
-        ]);
-
-        // dd($validatedData);
-
-        DB::statement("UPDATE `items` SET `stock` = " . (int)$validatedData['stock'] . " WHERE `items` . `id` = " .$validatedData['id']);
-        
-        return redirect('items')->with("success", $item->name . ' stock has been added');
-
     }
 
     /**

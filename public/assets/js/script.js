@@ -3,6 +3,7 @@ const addItemButton = document.querySelector("#addItemButton");
 const updateItemButton = document.querySelectorAll("#updateItemButton");
 const addRecordButton = document.querySelector("#addRecordButton");
 const addStockButton = document.querySelector("#addStockButton");
+const addInOutButton = document.querySelector("#addInOutButton")
 
 const modalContainer = document.querySelector("#modal");
 const modalLabel = document.querySelector("#modalLabel");
@@ -59,9 +60,15 @@ $(document).ready(function(){
         buttonSubmit.innerHTML = "Add";
     });
 
+    $(addInOutButton).on("click", ()=>{
+        modalLabel.innerHTML = "Add In Out";
+        modalForm.setAttribute("action", "inout");
+        buttonSubmit.innerHTML = "Add";
+    });
+
     $(addStockButton).on("click", ()=>{
         let id = $(addStockButton).attr("data-id");
         modalInputStockId.value = id;
-        modalStockForm.setAttribute("action", `items/addStock/${id}`);
+        modalStockForm.setAttribute("action", `inout/${id}`);
     });
 })

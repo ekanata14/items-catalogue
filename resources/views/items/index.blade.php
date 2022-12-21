@@ -33,7 +33,34 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $item->sell_price }}</td>
-                        <td>{{ $item->stock }}</td>
+                        <td>@php
+                            $itemIn = $item->inout->map(function($i){
+                                return collect($i->toArray())->only('in')->all();
+                            });
+
+                            $itemOut = $item->inout->map(function($o){
+                                return collect($o->toArray())->only('out')->all();
+                            });
+
+                            $resultIn = 0;
+                            $resultOut = 0;
+
+                            foreach($itemIn as $in){
+                                foreach($in as $i){
+                                    $resultIn += (int)$i;
+                                }
+                            }
+
+                            foreach($itemOut as $out){
+                                foreach($out as $o){
+                                    $resultOut += (int)$o;
+                                }
+                            }
+
+                            $result = $resultIn - $resultOut;
+                            echo $result;
+
+                        @endphp</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td class="d-flex gap-2">

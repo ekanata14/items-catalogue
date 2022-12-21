@@ -35,10 +35,32 @@
 
                     </thead>
                     <tbody>
-                        {{-- @foreach ($items as $item)
-                        
-                        <td>{{ $loop->iteration }}</td>
-                        @endforeach --}}
+                        @foreach ($items as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->sell_price }}</td>
+                            <td>@php
+                                $itemOut = $item->inout->map(function($i){
+                                    return collect($i->toArray())->only('out')->all();
+                                });
+
+                                $resultOut = 0;
+
+                                foreach($itemOut as $out){
+                                    foreach($out as $o){
+                                        $resultOut += $o;
+                                    }
+                                }
+
+                                echo $resultOut;
+
+                                // echo number_format($item->sell_price * $resultOut, 2, '.', ',');
+                            @endphp</td>
+                            <td id="total">{{ $item->sell_price * $resultOut }}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <th>Grand Total</th>
@@ -46,7 +68,7 @@
                         <th></th>
                         <th></th>
                         <th>1000</th>
-                        <th>10000</th>
+                        <th id="grandTotal"></th>
                     </tfoot>
                 </table>
             </div>

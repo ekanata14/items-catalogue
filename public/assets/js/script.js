@@ -20,6 +20,18 @@ const inputPrice = document.querySelector("#itemPrice");
 const inputSellPrice = document.querySelector("#itemSellPrice");
 
 const put = document.createElement("input");
+
+const total = document.querySelectorAll('#total');
+let result = 0;
+
+total.forEach((item)=>{
+    result += parseInt(item.innerHTML);
+})
+
+const grandTotal = document.querySelector('#grandTotal');
+
+grandTotal.innerHTML = result;
+
 Object.assign(put, {
     type : 'hidden',
     name : '_method',
@@ -29,6 +41,11 @@ Object.assign(put, {
 
 
 $(document).ready(function(){
+    
+    // total.forEach(t =>{
+    //     $(console.log(t).value);
+    // });
+
     $(addItemButton).on("click", ()=>{
         modalLabel.innerHTML = "Add Item";
         modalForm.setAttribute("action", "items");

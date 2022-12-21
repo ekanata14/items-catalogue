@@ -19,7 +19,7 @@ class InOutController extends Controller
     {
         return view('inout.index', [
             'items' => Items::all(),
-            'inouts' => InOut::all()
+            'inouts' => InOut::latest()->paginate(10)
         ]);
     }
 

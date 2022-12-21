@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1>Sale Records</h1>
+        <h1>In Out Records</h1>
         <div class="row">
             <div class="col-6">
                 <form action="/sale" method="POST" class="gap-3">
@@ -57,6 +57,9 @@
                         <th>10000</th>
                     </tfoot>
                 </table>
+                <div class="mt-4">
+                    {{ $inouts->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -21,6 +21,7 @@
                     <th>Price</th>
                     <th>Sell Price</th>
                     <th>Stock</th>
+                    <th>Sold</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Action</th>
@@ -60,6 +61,21 @@
                             $result = $resultIn - $resultOut;
                             echo $result;
 
+                        @endphp</td>
+                        <td>@php
+                            $itemOut = $item->inout->map(function($o){
+                                return collect($o->toArray())->only('out')->all();
+                            });
+
+                            $resultOut = 0;
+
+                            foreach($itemOut as $out){
+                                foreach($out as $o){
+                                    $resultOut += (int)$o;
+                                }
+                            }
+
+                            echo $resultOut;
                         @endphp</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>

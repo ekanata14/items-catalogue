@@ -1,10 +1,13 @@
-// Modal Anatomies
+// Buttons
 const addItemButton = document.querySelector("#addItemButton");
 const updateItemButton = document.querySelectorAll("#updateItemButton");
 const addRecordButton = document.querySelector("#addRecordButton");
 const addStockButton = document.querySelector("#addStockButton");
-const addInOutButton = document.querySelector("#addInOutButton")
+const addInOutButton = document.querySelector("#addInOutButton");
+const addCategoryButton = document.querySelector("#addCategoryButton");
+const updateCategoryButton = document.querySelectorAll("#updateCategoryButton");
 
+// Modal Anatomies
 const modalContainer = document.querySelector("#modal");
 const modalLabel = document.querySelector("#modalLabel");
 const modalBody = document.querySelector("#modalBody");
@@ -15,23 +18,15 @@ const modalStock = document.querySelector("#addStockModa")
 const modalStockForm = document.querySelector("#addStockForm");
 const modalInputStockId = document.querySelector("#itemStockId");
 
+// Inputs
 const inputName = document.querySelector("#itemName");
 const selectCategory = document.querySelector("#category");
 const inputPrice = document.querySelector("#itemPrice");
 const inputSellPrice = document.querySelector("#itemSellPrice");
 
+const inputCatName = document.querySelector("#categoryName");
+
 const put = document.createElement("input");
-
-// const total = document.querySelectorAll('#total');
-// let result = 0;
-
-// total.forEach((item)=>{
-//     result += parseInt(item.innerHTML);
-// })
-
-// const grandTotal = document.querySelector('#grandTotal');
-// grandTotal.innerHTML = result;
-
 Object.assign(put, {
     type : 'hidden',
     name : '_method',
@@ -41,10 +36,6 @@ Object.assign(put, {
 
 
 $(document).ready(function(){
-    
-    // total.forEach(t =>{
-    //     $(console.log(t).value);
-    // });
 
     $(addItemButton).on("click", ()=>{
         modalLabel.innerHTML = "Add Item";
@@ -87,9 +78,25 @@ $(document).ready(function(){
         buttonSubmit.innerHTML = "Add";
     });
 
-    $(addStockButton).on("click", ()=>{
-        let id = $(addStockButton).attr("data-id");
-        modalInputStockId.value = id;
-        modalStockForm.setAttribute("action", `inout/${id}`);
+    $(addCategoryButton).on("click", ()=>{
+        modalLabel.innerHTML = "Add Category";
+        modalForm.setAttribute("action", "category");
+        buttonSubmit.innerHTML = "Add";
     });
+
+    updateCategoryButton.forEach(updateCatButton => {
+        $(updateCatButton).on("click", ()=>{
+            let id = $(updateCatButton).attr("data-id");
+            let name = $(updateCatButton).attr('data-name');
+
+            modalLabel.innerHTML = "Update Category";
+            modalForm.setAttribute("action", "category/" + id);
+            modalForm.append(put);
+            buttonSubmit.innerHTML = "Update";
+
+            inputCatName.setAttribute("value", name);
+
+        })
+    })
+
 })

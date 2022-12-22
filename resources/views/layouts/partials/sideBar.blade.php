@@ -41,6 +41,12 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item {{ Request::is('category') ? 'active' : ''}}">
+        <a class="nav-link collapsed" href="/category">
+            <i class="fa-solid fa-list"></i>
+            <span>Category</span>
+        </a>
+    </li>
     <li class="nav-item {{ Request::is('items') ? 'active' : ''}}">
         <a class="nav-link collapsed" href="/items">
             <i class="fa-solid fa-basket-shopping"></i>

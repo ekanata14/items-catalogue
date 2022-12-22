@@ -17,6 +17,7 @@
                 <thead>
                     <th>No</th>
                     <th>Item Id</th>
+                    <th>Category</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Sell Price</th>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->item_id }}</td>
+                        <td>{{ $item->category->name }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $item->sell_price }}</td>
@@ -81,7 +83,7 @@
                         <td>{{ $item->updated_at }}</td>
                         <td class="d-flex gap-2">
                             <button id="addStockButton" data-bs-toggle="modal" data-bs-target="#addStockModal" class="btn btn-info" data-id="{{ $item->id }}"><i class="fas fa-plus"></i> Add Stock</button>
-                            <button class="btn btn-warning" id="updateItemButton" data-bs-toggle="modal" data-bs-target="#modal" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" data-sellPrice="{{ $item->sell_price }}"><i class="fas fa-pen"></i></button>
+                            <button class="btn btn-warning" id="updateItemButton" data-bs-toggle="modal" data-bs-target="#modal" data-id="{{ $item->id }}" data-catid = "{{ $item->category_id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" data-sellPrice="{{ $item->sell_price }}"><i class="fas fa-pen"></i></button>
                             <form action="/items/{{ $item->id }}" method="POST">
                                 @csrf
                                 @method('delete')
@@ -115,6 +117,23 @@
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
+                @php
+                @endphp
+                <div class="form-group">
+                    <label for="category">Item Category</label>
+                    <select name="category_id" id="category" class="form-select @error('category') is-invalid @enderror">
+                        @foreach($categories as $category)
+                            @if($_COOKIE['category_id'] == $category->id)
+                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                            @else
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
                 <div class="form-group">
                     <label for="price">Item Price</label>
                     <input type="text" id="itemPrice" name="price" class="form-control form-control-user @error('price') is-invalid @enderror" placeholder="Price" required autofocus>
@@ -129,13 +148,13 @@
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="stock">Stock</label>
                     <input type="number" id="stock" name="stock" class="form-control form-control-user @error('stock') is-invalid @enderror" placeholder="Stock" required autofocus >
                     @error('stock')
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
-                </div>
+                </div> --}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -175,5 +194,17 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const total = document.querySelectorAll('#total');
+    let result = 0;
+
+    total.forEach((item)=>{
+        result += parseInt(item.innerHTML);
+    })
+
+    const grandTotal = document.querySelector('#grandTotal');
+    grandTotal.innerHTML = result;
+  </script>
 
 @endsection

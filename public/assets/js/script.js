@@ -16,21 +16,21 @@ const modalStockForm = document.querySelector("#addStockForm");
 const modalInputStockId = document.querySelector("#itemStockId");
 
 const inputName = document.querySelector("#itemName");
+const selectCategory = document.querySelector("#category");
 const inputPrice = document.querySelector("#itemPrice");
 const inputSellPrice = document.querySelector("#itemSellPrice");
 
 const put = document.createElement("input");
 
-const total = document.querySelectorAll('#total');
-let result = 0;
+// const total = document.querySelectorAll('#total');
+// let result = 0;
 
-total.forEach((item)=>{
-    result += parseInt(item.innerHTML);
-})
+// total.forEach((item)=>{
+//     result += parseInt(item.innerHTML);
+// })
 
-const grandTotal = document.querySelector('#grandTotal');
-
-grandTotal.innerHTML = result;
+// const grandTotal = document.querySelector('#grandTotal');
+// grandTotal.innerHTML = result;
 
 Object.assign(put, {
     type : 'hidden',
@@ -56,6 +56,7 @@ $(document).ready(function(){
     updateItemButton.forEach(updateButton => {
         $(updateButton).on("click", ()=>{
             let id = $(updateButton).attr("data-id");
+            let categoryId = $(updateButton).attr("data-catid");
             let name = $(updateButton).attr("data-name");
             let price = $(updateButton).attr("data-price");
             let sellPrice = $(updateButton).attr("data-sellPrice");
@@ -66,8 +67,11 @@ $(document).ready(function(){
             modalForm.append(put);
 
             inputName.setAttribute("value", name);
+            selectCategory.setAttribute("value", categoryId);
             inputPrice.setAttribute("value", price);
             inputSellPrice.setAttribute("value", sellPrice);
+
+            document.cookie(`catid=${categoryId}`);
         });
     });
 

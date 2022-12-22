@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('in_outs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('items_id');
+            $table->foreignId('category_id');
             $table->string('name');
             $table->integer('in');
             $table->integer('out');

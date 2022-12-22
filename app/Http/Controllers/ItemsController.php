@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreItemsRequest;
 use App\Http\Requests\UpdateItemsRequest;
 use App\Models\Items;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -18,8 +19,8 @@ class ItemsController extends Controller
     public function index()
     {
         return view('items.index',[
-            'items' => Items::all()
-            
+            'items' => Items::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -43,12 +44,15 @@ class ItemsController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'category_id' => 'required',
             'price' => 'required',
-            'sell_price' => 'required',
-            'stock' => 'required'
+            'sell_price' => 'required'
         ]);
 
         $validatedData["item_id"] = Str::upper(Str::substr($validatedData['name'], 0, 3) . Str::substr($validatedData['name'], -3));
+        $validatedData["stock"] = 0;
+
+        // dd($validatedData);
 
         Items::create($validatedData);
 
@@ -88,6 +92,7 @@ class ItemsController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
+            'category_id' => 'required',
             'price' => 'required',
             'sell_price' => 'required'
         ]);

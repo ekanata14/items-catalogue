@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Items;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class InOut extends Model
 {
@@ -15,5 +17,9 @@ class InOut extends Model
 
     public function Items(){
         return $this->belongsTo(Items::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 }

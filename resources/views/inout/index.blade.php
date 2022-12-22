@@ -28,11 +28,11 @@
                     <thead>
                         <th>No</th>
                         <th>Item Id</th>
+                        <th>Category</th>
                         <th>Name</th>
                         <th>In</th>
                         <th>Out</th>
                         <th>Created At</th>
-                        <th>Total</th>
 
                     </thead>
                     <tbody>
@@ -40,6 +40,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $inout->items_id }}</td>
+                            <td>{{ $inout->category->name }}</td>
                             <td>{{ $inout->name }}</td>
                             <td>{{ $inout->in }}</td>
                             <td>{{ $inout->out }}</td>
@@ -79,7 +80,7 @@
                     <label for="name">Item Name</label>
                     <select name="items_id" id="itemsId" class="form-select mb-3" @error('name') is-invalid @enderror">
                         @foreach($items as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            <option value="{{ $item->id }},{{ $item->category_id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
                     @error('name')

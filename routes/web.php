@@ -25,22 +25,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // User Controller
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->middleware('auth');
 
 // Items Controller
 Route::resource('items', ItemsController::class);
 Route::post('items/addStock/{id}', [ItemsController::class, 'addStock'])->name('addStock');
 
 // Sale Controller
-Route::resource('sale', SaleController::class);
+Route::resource('sale', SaleController::class)->middleware('auth');
 
 // In Out Controller
-Route::resource('inout', InOutController::class);
+Route::resource('inout', InOutController::class)->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

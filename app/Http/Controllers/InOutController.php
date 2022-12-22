@@ -47,7 +47,11 @@ class InOutController extends Controller
             'in' => 'required',
             'out' => 'required'
         ]);
-        
+
+        $array = explode(',',$validatedData['items_id']);
+        $validatedData['items_id'] = $array[0];
+        $validatedData['category_id'] = $array[1];
+
         // Get Item Name
         $myItem = $item->where('id', $validatedData['items_id'])->get('name');
 

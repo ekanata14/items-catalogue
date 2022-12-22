@@ -27,6 +27,7 @@
                 <table class="table table-striped">
                     <thead>
                         <th>No</th>
+                        <th>Category</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Sell Price</th>
@@ -38,6 +39,7 @@
                         @foreach ($items as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->category->name }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->sell_price }}</td>
@@ -57,13 +59,14 @@
                                 echo $resultOut;
 
                                 // echo number_format($item->sell_price * $resultOut, 2, '.', ',');
-                            @endphp</td>
+                        @endphp</td>
                             <td id="total">{{ $item->sell_price * $resultOut }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <th>Grand Total</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -112,4 +115,15 @@
     </div>
   </div>
 
+  <script>
+    const total = document.querySelectorAll('#total');
+    let result = 0;
+
+    total.forEach((item)=>{
+        result += parseInt(item.innerHTML);
+    })
+
+    const grandTotal = document.querySelector('#grandTotal');
+    grandTotal.innerHTML = result;
+  </script>
 @endsection

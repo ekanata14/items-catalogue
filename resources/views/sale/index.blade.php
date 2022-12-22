@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="table-responsive">
+            <div class="table-responsive col-10">
                 <table class="table table-striped">
                     <thead>
                         <th>No</th>
@@ -33,7 +33,6 @@
                         <th>Sell Price</th>
                         <th>Amount</th>
                         <th>Total</th>
-
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
@@ -65,12 +64,12 @@
                         @endforeach
                     </tbody>
                     <tfoot>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th>Grand Total</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>1000</th>
                         <th id="grandTotal"></th>
                     </tfoot>
                 </table>

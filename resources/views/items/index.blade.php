@@ -12,7 +12,7 @@
     <h1>Items</h1>
     <button id="addItemButton" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modal">Add Item <i class="fas fa-plus"></i></button>
     <div class="row">
-        <div class="table-responsive col-12">
+        <div class="table-responsive col-10">
             <table class="table table-striped">
                 <thead>
                     <th>No</th>
@@ -79,8 +79,8 @@
 
                             echo $resultOut;
                         @endphp</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->updated_at }}</td>
+                        <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                        <td>{{ date('d-m-Y', strtotime($item->updated_at)) }}</td>
                         <td class="d-flex gap-2">
                             <button class="btn btn-warning" id="updateItemButton" data-bs-toggle="modal" data-bs-target="#modal" data-id="{{ $item->id }}" data-catid = "{{ $item->category_id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" data-sellPrice="{{ $item->sell_price }}"><i class="fas fa-pen"></i></button>
                             <form action="/items/{{ $item->id }}" method="POST">
@@ -92,6 +92,19 @@
                     </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <th>No</th>
+                    <th>Item Id</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Sell Price</th>
+                    <th>Stock</th>
+                    <th>Sold</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Action</th>
+                </tfoot>
             </table>
         </div>
     </div>

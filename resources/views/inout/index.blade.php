@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="table-responsive">
+            <div class="table-responsive col-10">
                 <table class="table table-striped">
                     <thead>
                         <th>No</th>
@@ -49,13 +49,13 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <th>Grand Total</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>1000</th>
-                        <th>10000</th>
+                        <th>No</th>
+                        <th>Item Id</th>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>In</th>
+                        <th>Out</th>
+                        <th>Created At</th>
                     </tfoot>
                 </table>
                 <div class="mt-4">

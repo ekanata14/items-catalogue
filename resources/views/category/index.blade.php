@@ -12,7 +12,7 @@
     <h1>Category</h1>
     <button id="addCategoryButton" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#modal">Add Item <i class="fas fa-plus"></i></button>
     <div class="row">
-        <div class="table-responsive col-12">
+        <div class="table-responsive col-6">
             <table class="table table-striped">
                 <thead>
                     <th>No</th>

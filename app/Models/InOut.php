@@ -13,7 +13,11 @@ class InOut extends Model
 
     protected $guarded = ['id'];
 
-    //
+    public function scopeFilter($query, Array $filters){
+        $query->when($filters['date'] ?? false, function($query, $date){
+            return $query->where('inout_date', 'like', $date );
+        });
+    }
 
     public function Items(){
         return $this->belongsTo(Items::class);

@@ -45,7 +45,8 @@ class InOutController extends Controller
         $validatedData = $request->validate([
             'items_id' => 'required',
             'in' => 'required',
-            'out' => 'required'
+            'out' => 'required',
+            'inout_date' => 'required'
         ]);
 
         $array = explode(',',$validatedData['items_id']);
@@ -116,5 +117,14 @@ class InOutController extends Controller
     public function destroy(InOut $inOut)
     {
         //
+    }
+
+    public function searchByDate(Request $request)
+    {
+        return view('inout.index',[
+            'items' => Items::all(),
+            'request' => $request->date,
+            'inouts' => Inout::latest()->filter(request(['date']))->paginate(10)
+        ]);
     }
 }

@@ -5,13 +5,11 @@
         <h1>In Out Records</h1>
         <div class="row">
             <div class="col-6">
-                <form action="/sale" method="POST" class="gap-3">
+                <form action="/inout/search" method="POST" class="gap-3">
                     @csrf
                     <div class="d-flex gap-3 align-items-center">
-                        <label for="start_date">Start Date</label>
-                        <input type="date" name="start_date" class="form-control">
-                        <label for="end_date">End Date</label>
-                        <input type="date" name="end_date" class="form-control">
+                        <label for="start_date">Date</label>
+                        <input type="date" name="date" class="form-control" value="{{ (isset($request)) ? $request : ''}}">
                         <button class="btn btn-info" type="submit">Search</button>
                     </div>
                 </form>
@@ -23,6 +21,13 @@
             </div>
         </div>
         <div class="row">
+            @if($inouts->count() == 0)
+                <tr>
+                    <td>
+                        <h3>No Results Found</h3>
+                    </td>
+                </tr>
+            @else
             <div class="table-responsive col-10">
                 <table class="table table-striped">
                     <thead>
@@ -32,21 +37,21 @@
                         <th>Name</th>
                         <th>In</th>
                         <th>Out</th>
-                        <th>Created At</th>
-
+                        <th>Date</th>
                     </thead>
                     <tbody>
                         @foreach ($inouts as $inout)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $inout->items_id }}</td>
-                            <td>{{ $inout->category->name }}</td>
-                            <td>{{ $inout->name }}</td>
-                            <td>{{ $inout->in }}</td>
-                            <td>{{ $inout->out }}</td>
-                            <td>{{ date('d-m-Y', strtotime($inout->created_at))}}</td>
-                        </tr>
-                        @endforeach
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $inout->items_id }}</td>
+                                <td>{{ $inout->category->name }}</td>
+                                <td>{{ $inout->name }}</td>
+                                <td>{{ $inout->in }}</td>
+                                <td>{{ $inout->out }}</td>
+                                <td>{{ $inout->inout_date }}</td>
+                                {{-- <td>{{ date('d-m-Y', strtotime($inout->created_at))}}</td> --}}
+                            </tr>
+                            @endforeach
                     </tbody>
                     <tfoot>
                         <th>No</th>
@@ -55,13 +60,14 @@
                         <th>Name</th>
                         <th>In</th>
                         <th>Out</th>
-                        <th>Created At</th>
+                        <th>Date</th>
                     </tfoot>
                 </table>
                 <div class="mt-4">
                     {{ $inouts->links() }}
                 </div>
             </div>
+            @endif
         </div>
     </div>
 
@@ -86,6 +92,13 @@
                     @error('name')
                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                     @enderror
+
+                    <input type="date" id="date" name="inout_date" class="form-control form-control-user @error('date') is-invalid @enderror mb-3" placeholder="In Out Date" required autofocus>
+
+                    @error('date')
+                        <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                    @enderror
+
                     <input type="number" id="in" name="in" class="form-control form-control-user @error('in') is-invalid @enderror mb-3" placeholder="Item In" required autofocus>
 
                     @error('in')

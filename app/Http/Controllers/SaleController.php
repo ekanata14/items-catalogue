@@ -65,7 +65,7 @@ class SaleController extends Controller
      */
     public function edit(Items $items)
     {
-        //
+        
     }
 
     /**

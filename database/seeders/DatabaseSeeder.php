@@ -27,8 +27,17 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Items::factory()->create([
             'item_id' => "CINNDA",
-            'category_id' => '1',
+            'category_id' => '2',
             'name' => "Cincau Cap Panda",
+            'price' => 3000,
+            'sell_price' => 5000,
+            'stock' => 0
+        ]);
+
+        \App\Models\Items::factory()->create([
+            'item_id' => "FANNTA",
+            'category_id' => '2',
+            'name' => "Fanta",
             'price' => 3000,
             'sell_price' => 5000,
             'stock' => 0

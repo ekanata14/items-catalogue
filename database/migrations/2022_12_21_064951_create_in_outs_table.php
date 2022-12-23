@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('in');
             $table->integer('out');
+            $table->date('inout_date');
             $table->timestamps();
         });
     }

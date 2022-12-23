@@ -32,7 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('user', UserController::class)->middleware('auth');
 
 // Items Controller
-Route::resource('items', ItemsController::class);
+Route::resource('items', ItemsController::class)->middleware('auth');
 Route::post('items/addStock/{id}', [ItemsController::class, 'addStock'])->name('addStock');
 
 // Sale Controller
@@ -40,6 +40,7 @@ Route::resource('sale', SaleController::class)->middleware('auth');
 
 // In Out Controller
 Route::resource('inout', InOutController::class)->middleware('auth');
+Route::post('/inout/search', [InOutController::class, 'searchByDate']);
 
 // Category Controller
 Route::resource('category', CategoryController::class)->middleware('auth');
